@@ -1944,19 +1944,20 @@ extern "C" __declspec(dllexport) void __cdecl CNC_Handle_Player_Switch_To_AI(uin
 	if (PlayerWins || PlayerLoses || DLLExportClass::Get_Game_Over()) {
 		return;
 	}
-
+	
 	GlyphX_Debug_Print("CNC_Handle_Player_Switch_To_AI");
 
 	if (GameToPlay == GAME_NORMAL) {
 		return;
 	}
-
+	
 #ifdef KILL_PLAYER_ON_DISCONNECT
 
 	/*
 	** Kill player's units on disconnect.
 	*/
 	if (player_id != 0) {
+
 		DLLExportClass::Set_Player_Context(player_id);
 
 		if (PlayerPtr) {
@@ -1967,10 +1968,10 @@ extern "C" __declspec(dllexport) void __cdecl CNC_Handle_Player_Switch_To_AI(uin
 #else //KILL_PLAYER_ON_DISCONNECT
 
 	if (player_id != 0) {
-
+		
 		HousesType house;
-		HouseClass* ptr;
-
+		HouseClass *ptr;
+		
 		DLLExportClass::Set_Player_Context(player_id);
 
 		if (PlayerPtr) {
