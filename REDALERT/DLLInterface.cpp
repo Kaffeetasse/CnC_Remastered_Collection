@@ -2230,10 +2230,10 @@ extern "C" __declspec(dllexport) void __cdecl CNC_Handle_Player_Switch_To_AI(uin
 #else //KILL_PLAYER_ON_DISCONNECT
 
 	if (player_id != 0) {
-		
+
 		HousesType house;
-  		HouseClass *ptr;
-	
+		HouseClass* ptr;
+
 		DLLExportClass::Set_Player_Context(player_id);
 
 		if (PlayerPtr) {
@@ -3138,7 +3138,7 @@ void DLLExportClass::On_Multiplayer_Game_Over(void)
 
 	// Trigger an event for each human player, winner first (even if it's an AI)
 	for (int i = 0; i < player_count; i++) {
-		HouseClass *player_ptr = HouseClass::As_Pointer(Session.Players[i]->Player.ID);
+		HouseClass* player_ptr = HouseClass::As_Pointer(Session.Players[i]->Player.ID);
 		if (!player_ptr->IsDefeated) {
 			event.GlyphXPlayerID = Get_GlyphX_Player_ID(player_ptr);
 			event.GameOver.IsHuman = player_ptr->IsHuman;
@@ -3149,7 +3149,7 @@ void DLLExportClass::On_Multiplayer_Game_Over(void)
 	}
 
 	for (int i = 0; i < player_count; i++) {
-		HouseClass *player_ptr = HouseClass::As_Pointer(Session.Players[i]->Player.ID);
+		HouseClass* player_ptr = HouseClass::As_Pointer(Session.Players[i]->Player.ID);
 		if (player_ptr->IsHuman && player_ptr->IsDefeated) {
 			event.GlyphXPlayerID = Get_GlyphX_Player_ID(player_ptr);
 			event.GameOver.IsHuman = true;
@@ -4384,22 +4384,10 @@ extern "C" __declspec(dllexport) void __cdecl CNC_Handle_Sidebar_Request(Sidebar
 	}
 
 	switch (request_type) {
-		
+
 		// MBL 06.02.2020 - Changing right-click support for first put building on hold, and then subsequenct right-clicks to decrement that queue count for 1x or 5x; Then, 1x or 5x Left click will resume from hold		
 		// Handle and fall through to start construction (from hold state) below  
-		case SIDEBAR_REQUEST_START_CONSTRUCTION_MULTI:
-
-		case SIDEBAR_REQUEST_START_CONSTRUCTION:
-			DLLExportClass::Start_Construction(player_id, buildable_type, buildable_id);
-			break;
-			
-		case SIDEBAR_REQUEST_HOLD_CONSTRUCTION:
-			DLLExportClass::Hold_Construction(player_id, buildable_type, buildable_id);
-			break;
-			
-		case SIDEBAR_REQUEST_CANCEL_CONSTRUCTION:
-			DLLExportClass::Cancel_Construction(player_id, buildable_type, buildable_id);
-			break;
+	case SIDEBAR_REQUEST_START_CONSTRUCTION_MULTI:
 
 	case SIDEBAR_REQUEST_START_CONSTRUCTION:
 		DLLExportClass::Start_Construction(player_id, buildable_type, buildable_id);
@@ -7738,7 +7726,8 @@ void DLLExportClass::Selected_Guard_Mode(uint64 player_id)
 			if (tech != NULL && tech->Can_Player_Fire()) {
 				if (tech->Can_Player_Move()) {
 					OutList.Add(EventClass(TargetClass(tech), MISSION_GUARD_AREA));
-				} else {
+				}
+				else {
 					OutList.Add(EventClass(TargetClass(tech), MISSION_GUARD));
 				}
 			}
@@ -8387,7 +8376,7 @@ void DLLExportClass::Debug_Spawn_Unit(const char* object_name, int x, int y, boo
 			if (!building->Unlimbo(Cell_Coord(cell))) {
 				delete building;
 			}
-}
+		}
 
 #if (0)		 
 		Map.PendingObject = &BuildingTypeClass::As_Reference(structure_type);
@@ -8401,7 +8390,7 @@ void DLLExportClass::Debug_Spawn_Unit(const char* object_name, int x, int y, boo
 		}
 #endif		
 		return;
-}
+	}
 
 
 	UnitType unit_type = UnitTypeClass::From_Name(object_name);
